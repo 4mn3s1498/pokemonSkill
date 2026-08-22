@@ -42,18 +42,23 @@ export default function App() {
       <div>
         {pokemon ? (
           <>
-            {pokemon.name}
-            
+            <div>{pokemon.name}</div>
 
             <img src={pokemon.sprites.front_default} />
 
-            {pokemon.abilities[0].ability.name}
+            <div>{pokemon.abilities[0].ability.name}</div>
 
-            {pokemon.types
-              .map((type) => {
-                return type.type.name;
-              })
-              .join(" ")}
+            <div>
+              {pokemon.types
+                .map((type) => type.type.name)
+                .join(" ")}
+            </div>
+
+            {pokemon.stats.map((stat) => (
+              <div key={stat.stat.name}>
+                {stat.stat.name}: {stat.base_stat}
+              </div>
+            ))}
           </>
         ) : (
           ""
