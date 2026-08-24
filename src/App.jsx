@@ -8,7 +8,16 @@ async function fetchPokemon(nome) {
 
     const data = await response.json();
 
-    return data;
+    const datiLotta = await fetch(
+      `https://pokeapi.co/api/v2/type/17/`
+    );
+
+    const danni = await datiLotta.json();
+
+    return {
+      dati: data,
+      datiLotta: danni
+    };
   } catch (error) {
     console.error(error);
   }
@@ -17,6 +26,21 @@ async function fetchPokemon(nome) {
 export default function App() {
   const [input, setInput] = useState("");
   const [pokemon, setPokemon] = useState("");
+  const [lotta, setLotta] = useState("");
+
+  const relazione = "double_damage_to";
+
+  const forte = {
+    titolo: "Forte contro",
+    relazione: "double_damage_to"
+  };
+
+  const debole = {
+    titolo: "Debole contro",
+    relazione: "double_damage_from"
+  };
+
+  const relazioni = [forte, debole];
 
   return (
     <>
@@ -32,7 +56,10 @@ export default function App() {
       <button
         onClick={async () => {
           const data = await fetchPokemon(input);
-          setPokemon(data);
+
+          setPokemon(data.dati);
+          setLotta(data.datiLotta);
+
           console.log(pokemon);
         }}
       >
@@ -60,6 +87,24 @@ export default function App() {
               </div>
             ))}
           </>
+        ) : (
+          ""
+        )}
+      </div>
+
+      <div>
+        {lotta ? (
+          relazioni.map((relazione) => (
+            <div key={relazione.titolo}>
+              {relazione.titolo}{" "}
+
+              {lotta.damage_relations[relazione.relazione].map((data) => (
+                <span key={data.name}>
+                  {data.name}{" "}
+                </span>
+              ))}
+            </div>
+          ))
         ) : (
           ""
         )}
