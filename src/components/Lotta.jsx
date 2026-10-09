@@ -1,8 +1,5 @@
- import { useState } from "react";
- import { getNomeItaliano } from "./api/pkmn";
- 
- export function Lotta({ lotta }){
-      const forte = {
+export function Lotta({ lotta }) {
+  const forte = {
     titolo: "Forte contro: ",
     relazione: "double_damage_to"
   };
@@ -11,12 +8,21 @@
     titolo: "Debole contro: ",
     relazione: "double_damage_from"
   };
+  const immune = {
+    titolo: "Non fa danno a: ",
+    relazione: "no_damage_to"
+};
+const immuneDa = {
+    titolo: "Non riceve danno: ",
+    relazione: "no_damage_from"
+};
 
-  const relazioni = [forte, debole];
+  const relazioni = [forte, debole,immune,immuneDa];
 
-  return <div>
-        {lotta ? (
-          relazioni.map((relazione) => (
+  return (
+    <div>
+      {lotta
+        ? relazioni.map((relazione) => (
             <div key={relazione.titolo}>
               {relazione.titolo}{" "}
 
@@ -27,8 +33,7 @@
               ))}
             </div>
           ))
-        ) : (
-          ""
-        )}
-      </div>
-  }
+        : ""}
+    </div>
+  );
+}

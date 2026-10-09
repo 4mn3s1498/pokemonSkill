@@ -32,7 +32,7 @@ export default function App() {
         Cerca
       </button>
 
-      <PkmnCard pokemon={pokemon} lingua={nomeItaliano} />
+      <PkmnCard pokemon={pokemon} lingua={nomeItaliano}/>
       <Lotta lotta={lotta} />
     </>
   );
