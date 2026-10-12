@@ -1,36 +1,56 @@
+
 import { Lotta } from "./Lotta";
 
 export function PkmnCard({ pokemon, lingua, lotta }) {
+  if (!pokemon) return null;
+
   return (
     <div className="pokemon-card">
-      {pokemon ? (
-        <>
+      <div className="pokemon-layout">
+        {/* Colonna sinistra: Pokémon */}
+        <div className="pokemon">
           <h2>{pokemon.name}</h2>
 
           <img
             className="pokemon-img"
-            src={pokemon.sprites.front_default}
+            src={
+              pokemon.sprites.other["official-artwork"].front_default
+            }
             alt={pokemon.name}
           />
+        </div>
 
+        {/* Colonna destra: tutti i dati */}
+        <div className="pokemon-dati">
           <div className="pokemon-info">
-            <p>Abilità: {pokemon.abilities[0].nome}</p>
-            <p>Tipo: {lingua}</p>
+            <p>
+              <strong>Abilità</strong>
+              <span>{pokemon.abilities[0].nome}</span>
+            </p>
+
+            <p>
+              <strong>Tipo</strong>
+              <span>{lingua}</span>
+            </p>
           </div>
 
-          <div className="pokemon-stats">
+          <section className="pokemon-stats">
+            <h3>Statistiche</h3>
+
             {pokemon.stats.map((stat) => (
               <p key={stat.name}>
-                {stat.name}: {stat.base_stat}
+                <span>{stat.name}</span>
+                <strong>{stat.base_stat}</strong>
               </p>
             ))}
-          </div>
+          </section>
 
-          <div className="pokemon-lotta">
+          <section className="pokemon-lotta">
+            <h3>Relazioni di lotta</h3>
             <Lotta lotta={lotta} />
-          </div>
-        </>
-      ) : null}
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

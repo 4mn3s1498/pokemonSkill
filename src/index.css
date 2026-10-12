@@ -1,50 +1,226 @@
-body {
-  background-color: #f5f5f5;
-   color: #222;
-}
-h1{
-  display: flex;
-  color:red;
-  font-size: 30px;
-  margin: 3px;
-  justify-content: center;
-  align-items: center;
+
+:root {
+  font-family: Arial, sans-serif;
+  font-synthesis: none;
 }
 
-input{
-  padding: 12px;
-  border-radius: 4px;
-  background-color: #f5f5f5;
-  border: 1px solid black;
+body {
+  margin: 0;
+  padding: 0;
 }
-button{
-  background-color: red;
-  color: #f5f5f5;
-  padding: 12px;
-  border-radius: 4px;
+
+.app {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  transition: background-color 0.2s, color 0.2s;
+
+  --accento: #ab000e;
 }
-button:hover{
-  background-color: darkred;
+
+.app.dark {
+  --sfondo: #171717;
+  --card: #222222;
+  --pannello: #2b2b2b;
+  --testo: #eeeeee;
+  --bordo: #444444;
+  --secondario: #bdbdbd;
+
+  background-color: var(--sfondo);
+  color: var(--testo);
 }
-.ricerca{
+
+.app.light {
+  --sfondo: #f2f0eb;
+  --card: #ffffff;
+  --pannello: #f5f3ef;
+  --testo: #252525;
+  --bordo: #d5d1c9;
+  --secondario: #686868;
+
+  background-color: var(--sfondo);
+  color: var(--testo);
+}
+
+h1 {
+  margin: 8px 0 24px;
+  text-align: center;
+  font-size: 30px;
+  color: var(--accento);
+}
+
+.ricerca,
+.tema {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
 }
-.pokemon-card{
-  background-color: #f5f5f5;
-  border: 1px,solid,black;
-  gap: 2px;
+
+.ricerca {
+  margin: 20px auto 32px;
+}
+
+input {
+  width: 260px;
+  max-width: 65%;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--card);
+  color: var(--testo);
+  border: 1px solid var(--bordo);
+  border-radius: 4px;
+}
+
+input::placeholder {
+  color: var(--secondario);
+}
+
+button {
+  padding: 12px 16px;
+  background: var(--accento);
+  color: white;
+  border: 1px solid var(--accento);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+.pokemon-card {
+  width: 1100px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--card);
+  border: 1px solid var(--bordo);
+}
+.pokemon-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.pokemon {
+  min-width: 0;
+  text-align: center;
+}
+
+.pokemon h2 {
+  margin: 8px 0 20px;
+  font-size: 28px;
+  text-transform: capitalize;
+}
+
+.pokemon-img {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+.pokemon-dati {
+  min-width: 0;
+  width: 100%;
+}
+.pokemon-info {
+  display: grid;
+  gap: 10px;
+}
+
+.pokemon-info p {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 12px;
+  background: var(--pannello);
+  border: 1px solid var(--bordo);
+  overflow-wrap: anywhere;
+}
+
+.pokemon-info strong {
+  font-size: 12px;
+  color: var(--secondario);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pokemon-info span {
+  font-size: 16px;
+}
+.pokemon-stats {
+  margin-top: 24px;
+}
+
+.pokemon-stats h3,
+.pokemon-lotta h3 {
+  margin: 0 0 14px;
+  font-size: 17px;
+}
+
+.pokemon-stats p {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bordo);
+  font-size: 14px;
+}
+
+.pokemon-stats p span {
+  color: var(--secondario);
+  text-transform: capitalize;
+}
+
+.pokemon-stats p strong {
+  font-variant-numeric: tabular-nums;
 }
 .pokemon-lotta {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid #ddd;
-  text-align: left;
+  width: 100%;
+  min-width: 0;
+  margin-top: 28px;
+  box-sizing: border-box;
+}
+
+.pokemon-lotta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
 }
 
 .pokemon-lotta > div > div {
-  margin-bottom: 12px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+  background: var(--pannello);
+  border: 1px solid var(--bordo);
   line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 650px) {
+  .app {
+    padding: 16px;
+  }
+
+  .pokemon-card {
+    padding: 16px;
+  }
+
+  .pokemon-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .pokemon-img {
+    max-width: 280px;
+  }
 }
